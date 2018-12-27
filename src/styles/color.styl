@@ -1,0 +1,41 @@
+mainBG = #202020;
+h1FG = #e0e0e0;
+h2FG = #909090;
+// 
+pinkBG = rgb(221, 0, 203);
+blueBG = rgb(0, 102, 255);
+greenBG = rgb(0, 170, 0);
+redBG = rgb(160, 0, 0);
+orangeBG = rgb(235, 125, 0);
+// 
+pinkFG = rgb(255, 214, 252);
+blueFG = rgb(231, 239, 255);
+greenFG = rgb(242, 255, 242);
+redFG = rgb(255, 234, 234);
+orangeFG = rgb(255, 241, 225);
+// 
+pinkLight = rgb(255, 143, 248);
+blueLight = rgb(137, 176, 255);
+greenLight = rgb(149, 255, 149);
+redLight = rgb(255, 144, 144);
+orangeLight = rgb(255, 199, 134);
+//
+
+
+$normal={
+    pink: rgb(255, 0, 234),
+    blue: rgb(0, 102, 255),
+    green: rgb(0, 223, 0),
+    red: rgb(255, 0, 0),
+    orange: rgb(255, 136, 0),
+    gray:rgb(126, 126, 126),
+    violet: rgb(153, 0, 255),
+}
+
+colorize(name, mode) {
+    if (mode == 'bg') {
+        background: name;
+    } else if (mode == 'fg') {
+        color: name;
+    }
+}

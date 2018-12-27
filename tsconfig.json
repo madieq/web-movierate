@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "esnext",
-    "strict": true,
+    "module": "es6",
+    "strict": false,
+    "allowJs": true,
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
@@ -31,7 +32,8 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
+    "src/App.vue"
   ],
   "exclude": [
     "node_modules"

@@ -2,19 +2,37 @@
   "name": "web-client",
   "version": "0.1.0",
   "private": true,
+  "experimentalDecorators": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "start": "start cmd /k \"npm run pug\" & start cmd /k \"npm run serve\" & start cmd /k \"npm run ws-server\" & start cmd /k \"npm run stylus\" & exit",
+    "stylus":"stylus -c -w ./src/templates --out ./public",
+    "serve": "vue-cli-service serve --port 80 --open",
+    "ws-server":"cd ../server-api && npm run start",
+    "build": "vue-cli-service build",
+    "pug": "pug src/templates --out public --watch"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.119",
+    "@types/pug": "^2.0.4",
+    "@types/randomstring": "^1.1.6",
+    "@types/ws": "^6.0.1",
+    "randomstring": "^1.1.5",
+    "simplebar-vue": "^0.1.1",
     "vue": "^2.5.17",
     "vue-class-component": "^6.0.0",
-    "vue-property-decorator": "^7.0.0"
+    "vue-intersect": "^1.1.2",
+    "vue-property-decorator": "^7.2.0",
+    "vue-router": "^3.0.2",
+    "ws": "^6.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.2.0",
     "@vue/cli-plugin-typescript": "^3.2.0",
     "@vue/cli-service": "^3.2.0",
+    "pug": "^2.0.3",
+    "pug-plain-loader": "^1.0.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
     "typescript": "^3.0.0",
     "vue-template-compiler": "^2.5.17"
   },

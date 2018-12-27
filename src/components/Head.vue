@@ -7,7 +7,7 @@ header
 				.logo-box
 					div(style="height:50px;width:50px;")
 			.search-container
-				input.head-search-container(placeholder="search" @keyup.enter="find($event.target.value)")
+				input.head-search-container(placeholder="search" @keyup.enter="find($event.target.value)" v-model="value") 
 			//- Movie-Tag
 		Auth
 </template>
@@ -34,6 +34,7 @@ header
 		props: {}
 	})
 	export default class Head extends Vue {
+		value=''
 		async updateState() {
 			let user = (await wcc.getSelf()).user;
 			if (user) cch.user = user;
@@ -45,7 +46,7 @@ header
 				name: "find",
 				params: { field: "name", value: value }
 			});
-			console.log("name", value);
+			this.value=''
 		}
 		async complexUpdate() {
 			try {
@@ -60,7 +61,7 @@ header
 			}
 		}
 		async mounted() {
-			this.complexUpdate();
+			// this.complexUpdate();
 		}
 	}
 </script>

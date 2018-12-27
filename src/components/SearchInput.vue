@@ -1,6 +1,6 @@
 <template lang="pug">
 	.search-input-container
-		input.search-input-field(type="text" placeholder="поиск" @keyup.enter="find($event.target.value)")
+		input.search-input-field(type="text" placeholder="поиск" @keyup.enter="find($event.target.value)" v-model="value")
 		//- .search-input-button
 </template>
 
@@ -13,12 +13,14 @@
 
 	@Component({ components: {}, props: { searchBy: String } })
 	export default class HeadPanel extends Vue {
+		value=''
 		find(value) {
 			this.$router.push({
 				name: "find",
 				params: { field: "name", value: value }
 			});
-			console.log("name", value);
+			this.value=''
+			// console.log("name", value);
 		}
 	}
 </script>

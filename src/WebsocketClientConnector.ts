@@ -144,7 +144,12 @@ export default class WebsocketClientConnector {
 
     listenChat(cb: (msg) => any) {
         let key = rnd.generate(32)
-        this.onMessageListeners[key] = { type: 'send_to_global_chat', callback: cb }
+        this.onMessageListeners[key] = {
+            type: 'send_to_global_chat', callback: (msgCont) => {
+                if (!msgCont.error)
+                    cb(msgCont['send_to_global_chat'])
+            }
+        }
         return key
     }
 

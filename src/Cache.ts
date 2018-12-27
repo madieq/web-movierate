@@ -9,6 +9,7 @@ export class Cache {
     movies: Object[] = []
     genres: String[] = []
     countries: String[] = []
+    messages=[]
     user = { username: null, password: null }
     _operative = {}
 

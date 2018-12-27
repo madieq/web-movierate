@@ -31,6 +31,7 @@ div
 	import { Cache } from "@/Cache";
 	import * as _ from "lodash";
 	import { EventBus } from "@/EventBus";
+	import * as Cookie from "js-cookie";
 
 	const wsc = WClient.getInstance();
 	const cch = Cache.getInstance();
@@ -61,9 +62,9 @@ div
 			window.scrollTo({ top: 0 });
 			this.initFields();
 			EventBus.$on("trigg-panel", () => {
-				if(this.mode==='authed')
-				this.panelShow = !this.panelShow;
+				if (this.mode === "authed") this.panelShow = !this.panelShow;
 			});
+			this.cookieAuth();
 		}
 
 		initFields() {
@@ -81,7 +82,7 @@ div
 		async signOutClick() {
 			try {
 				await wsc.signOut();
-				cch.signOut()
+				cch.signOut();
 				EventBus.$emit("auth");
 				this.initFields();
 			} catch (e) {
@@ -89,12 +90,32 @@ div
 			}
 		}
 
+		createCookieAuth() {
+			Cookie.set("username", this.user.username, { expires: 7 });
+			Cookie.set("password", this.user.password, { expires: 7 });
+		}
+
+		async cookieAuth() {
+			try {
+				await wsc.authUser(Cookie.get());
+				this.user = {
+					username: Cookie.get().username,
+					password: Cookie.get().password
+				};
+				cch.user = this.user;
+				this.mode = "authed";
+				EventBus.$emit("auth");
+				this.createCookieAuth();
+			} catch (e) {}
+		}
+
 		async authClick() {
 			try {
 				await wsc.authUser(this.user);
-				cch.user = this.user
+				cch.user = this.user;
 				this.mode = "authed";
 				EventBus.$emit("auth");
+				this.createCookieAuth();
 			} catch (e) {
 				this.errors.passwordNotEquals = true;
 			}
@@ -105,6 +126,7 @@ div
 				await wsc.registerUser(this.user);
 				cch.user = this.user;
 				this.mode = "authed";
+				this.createCookieAuth();
 			} catch (e) {
 				this.errors.passwordNotEquals = true;
 			}

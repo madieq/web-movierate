@@ -5,17 +5,19 @@
   "experimentalDecorators": true,
   "scripts": {
     "start": "start cmd /k \"npm run pug\" & start cmd /k \"npm run serve\" & start cmd /k \"npm run ws-server\" & start cmd /k \"npm run stylus\" & exit",
-    "stylus":"stylus -c -w ./src/templates --out ./public",
+    "stylus": "stylus -c -w ./src/templates --out ./public",
     "serve": "vue-cli-service serve --port 80 --open",
-    "ws-server":"cd ../server-api && npm run start",
+    "ws-server": "cd ../server-api && npm run start",
     "build": "vue-cli-service build",
     "pug": "pug src/templates --out public --watch"
   },
   "dependencies": {
+    "@types/js-cookie": "^2.2.0",
     "@types/lodash": "^4.14.119",
     "@types/pug": "^2.0.4",
     "@types/randomstring": "^1.1.6",
     "@types/ws": "^6.0.1",
+    "js-cookie": "^2.2.0",
     "randomstring": "^1.1.5",
     "simplebar-vue": "^0.1.1",
     "vue": "^2.5.17",

@@ -1,7 +1,9 @@
 <template lang="pug">
 	div
+		//- input.logger(type='button' value='log' @click='log()')
+		Chat
 		.panel(v-show="showMain")
-			input(type='button' value='log' @click='log()')
+			.icon-bg-image-chat.icon-button(@click="chatBtnClick()")
 		.container
 			p.coop by MaDiEQ
 </template>
@@ -10,10 +12,16 @@
 	import Vue from "vue";
 	import Component from "vue-class-component";
 	import { Cache } from "@/Cache";
+	import { EventBus } from "@/EventBus";
 
-	@Component({ components: {}, props: {} })
+	import Chat from "./Chat.vue";
+
+	@Component({ components: { Chat }, props: {} })
 	export default class Foot extends Vue {
 		showMain = true;
+		chatBtnClick() {
+			EventBus.$emit("chat-switch");
+		}
 		log() {
 			console.log("cache = ", Cache.getInstance());
 		}
@@ -62,7 +70,14 @@
 		z-index 100
 		box-shadow 0 -1px 1px 0 rgba(0, 0, 0, 0.15)
 		display flex
-		justify-content space-evenly
+		justify-content flex-start
 		align-items center
 		box-sizing border-box
+	.logger
+		position fixed
+		bottom 10px
+		right 10px
+		z-index 101
+	.icon-bg-image-chat
+		margin 0 5px
 </style>
